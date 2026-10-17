@@ -1,0 +1,9 @@
+# Name,     Type, SubType,  Offset,   Size
+# 4MB flash, no OTA in v1. The app gets 1.5 MB (1.23 MB used at Stage 3); LittleFS gets
+# 2.375 MB: the title fonts (Chinese, Japanese, Korean: ~1.87 MB) + the album-art cache.
+# nvs keeps its offset, so settings, calibration and the Spotify login survive a repartition.
+nvs,        data, nvs,      0x9000,   0x5000
+phy_init,   data, phy,      0xE000,   0x1000
+factory,    app,  factory,  0x10000,  0x180000
+spiffs,     data, spiffs,   0x190000, 0x260000
+coredump,   data, coredump, 0x3F0000, 0x10000

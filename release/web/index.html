@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CYD Spotify Remote — Install</title>
+<script type="module" src="https://unpkg.com/esp-web-tools@10.0.1/dist/web/install-button.js?module"></script>
+<style>
+:root{color-scheme:light dark;--bg:#f4f5f7;--card:#fff;--ink:#1c1e21;--dim:#65676b;--line:#d8dadf;--acc:#1db954}
+@media(prefers-color-scheme:dark){:root{--bg:#18191a;--card:#242526;--ink:#e4e6eb;--dim:#a8abaf;--line:#3a3b3c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:26px;margin:8px 0 4px}
+.sub{color:var(--dim);margin:0 0 20px}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin:0 0 8px}
+ol,ul{padding-left:22px;margin:6px 0}li{margin:5px 0}
+code{font-size:14px;background:var(--bg);padding:1px 5px;border-radius:5px}
+.warn{background:#fff4e5;border-color:#ffb74d;color:#663c00}
+@media(prefers-color-scheme:dark){.warn{background:#3a2a10;border-color:#8a5a14;color:#ffd699}}
+esp-web-install-button button[slot=activate]{padding:12px 22px;border:0;border-radius:10px;background:var(--acc);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.center{text-align:center;padding:8px 0}
+a{color:var(--acc)}
+</style>
+</head>
+<body><main>
+<h1>CYD Spotify Remote</h1>
+<p class="sub">A Spotify now-playing screen and remote for the 2.8" ESP32 "Cheap Yellow Display" (ESP32-2432S028R). Version 1.0.0.</p>
+
+<section>
+<h2>Install</h2>
+<ol>
+<li>Use <b>Chrome or Edge on a computer</b> (Web Serial; not Safari, Firefox or a phone).</li>
+<li>Plug the CYD into the computer with a USB <b>data</b> cable.</li>
+<li>Click <b>Install</b>, pick the serial port (often <code>USB Serial</code> or <code>CH340</code>), and wait about 2 minutes.</li>
+</ol>
+<div class="center">
+<esp-web-install-button manifest="manifest.json">
+  <button slot="activate">Install</button>
+  <span slot="unsupported">This browser can't flash devices. Use Chrome or Edge on a computer.</span>
+  <span slot="not-allowed">Open this page over https (or localhost) to install.</span>
+</esp-web-install-button>
+</div>
+</section>
+
+<section class="warn">
+<b>Installing erases the board.</b> Wi-Fi, the Spotify login and the touch calibration are set up again afterwards (a few minutes, below).
+</section>
+
+<section>
+<h2>After installing</h2>
+<ol>
+<li><b>Touch calibration</b> starts by itself: press and hold each target, then tap the centre.</li>
+<li>The screen shows a QR code for the hotspot <b>CYD-Spotify-XXXX</b>. Join it with your phone; the setup page opens.</li>
+<li>Add your Wi-Fi (and your phone's hotspot for the car — <b>2.4 GHz</b>, WPA2), then Save.</li>
+<li>Back on your home Wi-Fi, open <b>http://cyd-spotify.local</b> and follow the Spotify steps there.</li>
+</ol>
+<p>The full guide — creating the Spotify app, the car, troubleshooting — is in the <a href="../../README.md">README</a>.</p>
+</section>
+
+<section>
+<h2>Screen blank or garbled after installing?</h2>
+<p>Boards sold as ESP32-2432S028R come with one of two display chips. Hold a finger on the screen from power-on for <b>8 seconds</b> (the blue LED blinks from 4 s): it switches to the other chip and restarts.</p>
+</section>
+</main></body>
+</html>

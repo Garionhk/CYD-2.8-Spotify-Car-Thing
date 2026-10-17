@@ -1,0 +1,21 @@
+# PlatformIO build output and editor / OS files
+.pio/
+.vscode/
+.DS_Store
+
+# Local Claude Code settings (machine-specific)
+.claude/
+
+# Binaries: nothing except what a build or an install needs.
+# Kept: the TLS root certificates compiled into the firmware (tools/gen_ca_bundle.py), and the
+# release image that the web installer and esptool flash.
+*.bin
+!data/x509_crt_bundle.bin
+!release/*.bin
+
+# Noto source fonts for tools/gen_font.py: 17 MB, downloaded once (commands at the top of the script).
+# The generated device fonts in fs/fonts/ ARE committed.
+tools/fonts/
+
+# Python cache from the tools
+__pycache__/
