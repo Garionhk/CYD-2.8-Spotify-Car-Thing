@@ -16,28 +16,26 @@ Current version: **1.0.0**. Design notes and test results per stage: [docs/READM
 
 ## 1. Install
 
-### From the browser (no tools)
-
-The installer is `release/web/` (ESP Web Tools). Browsers only allow flashing from a page served over **https** or from **localhost**. To run it from your own computer:
-
-```bash
-python3 -m http.server 8000 --bind 127.0.0.1
-```
-
-Run that in the project folder, then open **http://localhost:8000/release/web/**.
-
-1. Use **Chrome or Edge on a computer** (Web Serial; not Safari, Firefox or a phone).
-2. Plug the CYD in with a USB **data** cable (some cables only charge), click **Install**, pick the serial port (often "USB Serial" / "CH340"), and wait about 2 minutes.
+Download the image: **[release/cyd-spotify-v1.0.0.bin](release/cyd-spotify-v1.0.0.bin)** (4 MB). It's the whole flash in one file (app, fonts and partition table), written at address **0x0**.
 
 Installing erases the board: Wi-Fi, the Spotify login and the touch calibration are set up again afterwards.
 
-### With esptool
+### From the browser: esptool.spacehuhn.com (no tools to install)
+
+1. Open **https://esptool.spacehuhn.com/** in **Chrome or Edge on a computer** (it uses Web Serial; Safari, Firefox and phones can't).
+2. Plug the CYD in with a USB **data** cable (some cables only charge).
+3. Set the baud rate to **115200** and click **Connect**. Pick the serial port (often "USB Serial" or "CH340").
+4. In the file row, set the offset to **0x0** and choose `cyd-spotify-v1.0.0.bin`.
+5. Click **Program** and wait for it to finish (a few minutes at 115200).
+6. Unplug the CYD and plug it back in (or press its **RST** button).
+
+### With esptool (command line)
 
 ```bash
 esptool.py --chip esp32 --baud 115200 write_flash 0x0 cyd-spotify-v1.0.0.bin
 ```
 
-Use 115200 baud: the CYD's CH340 USB chip often fails at 921600.
+Use 115200 baud in both cases: the CYD's CH340 USB chip often fails at 921600.
 
 ### Screen blank, white or garbled?
 
@@ -142,7 +140,7 @@ Hold the **BOOT** button for 5 s to open the setup hotspot again (for example to
 
 ## 6. Updating
 
-- **Reinstall** (browser or esptool, as in section 1): erases everything, so you set it up again.
+- **Reinstall** (esptool.spacehuhn.com or esptool, as in section 1): erases everything, so you set it up again.
 - **From source with PlatformIO** (`pio run -e cyd -t upload`): keeps Wi-Fi, login, calibration and settings. Add `-t uploadfs` only when the fonts changed; that also clears the cached cover.
 
 ---
@@ -154,7 +152,7 @@ PlatformIO, Arduino framework (Arduino-ESP32 2.0.17), TFT_eSPI configured in `pl
 ```bash
 pio run -e cyd -t upload        # the app
 pio run -e cyd -t uploadfs      # the fonts (LittleFS)
-./tools/make_release.sh         # release/cyd-spotify-v<version>.bin + release/web/
+./tools/make_release.sh         # release/cyd-spotify-v<version>.bin
 ```
 
 | Env | |
@@ -165,7 +163,7 @@ pio run -e cyd -t uploadfs      # the fonts (LittleFS)
 
 Fonts: `python3 tools/gen_font.py` builds `fs/fonts/*.cydf` from **Noto Sans CJK** and **Noto Sans** (download commands at the top of the script). `tools/gen_ca_bundle.py` builds the TLS root-certificate bundle.
 
-`./tools/make_release.sh` builds the release image from the `cyd` env, checks that the test endpoints are not in it, and writes the web installer's manifest.
+`./tools/make_release.sh` builds the release image from the `cyd` env and checks that the test endpoints are not in it.
 
 Design notes, measurements and decisions per stage: [docs/README.md](docs/README.md).
 

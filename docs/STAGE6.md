@@ -4,7 +4,7 @@
 > - A **wrong Wi-Fi password** is now recognised from ESP-IDF's disconnect reason. The screen says "Wrong password for …", and for a network the device has never joined, the setup hotspot opens by itself.
 > - The **screen-off** dropdown applies instantly.
 > - The idle screen shows the IP next to `cyd-spotify.local`.
-> - Release work (Noto fonts, merged image, web installer) is in `docs/README.md`.
+> - Release work (Noto fonts, merged image) is in `docs/README.md`.
 
 Firmware `0.9.7-stage6` (firmware only; the fonts are unchanged).
 

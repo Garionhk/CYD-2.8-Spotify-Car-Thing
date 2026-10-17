@@ -14,7 +14,7 @@ Each stage doc records what was true **at that stage**. A **"Since then"** note 
 | [STAGE6.md](STAGE6.md) | Car hardening: fast boot, power-cut-safe writes, watchdog, idle clock, screen-off, Wi-Fi fixes | done |
 | [UI_DESIGN.md](UI_DESIGN.md) | The Now Playing screen (design B rev. 3), menu, pickers, designs tried | done |
 | Stage 7 | Optional extras: rotary encoder, night theme (the device picker is already done) | skipped for now |
-| Stage 8 | Release: below | done; end-to-end test in progress |
+| Stage 8 | Release: below | done |
 
 ## Stage 8 — Release (1.0.0)
 
@@ -31,8 +31,8 @@ Each stage doc records what was true **at that stage**. A **"Since then"** note 
   | 0x190000 | LittleFS fonts |
 
   It fills the whole flash, so installing it is a factory reset.
-- **Web installer:** `release/web/` (`index.html`, `manifest.json`, which points at `../cyd-spotify-v<version>.bin`), using ESP Web Tools 10.0.1. It needs https or localhost; public hosting (for example GitHub Pages) is not set up yet.
-- **README:** install, setup, creating the Spotify app, use, the car, troubleshooting, updating, building.
+- **Flashing:** the image is written at 0x0 with [esptool.spacehuhn.com](https://esptool.spacehuhn.com/) (browser) or `esptool.py` (command line), both at 115200 baud. An ESP Web Tools installer page was drafted but not tested, so it isn't published.
+- **README:** install (esptool.spacehuhn.com / esptool), setup, creating the Spotify app, use, the car, troubleshooting, updating, building.
 - **Found during the end-to-end test:** a wrong Wi-Fi password kept the device "joining" forever. It's now detected at once (see `STAGE6.md`).
 
 ## Other files
